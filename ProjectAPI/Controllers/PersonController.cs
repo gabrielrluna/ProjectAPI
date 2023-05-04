@@ -1,33 +1,29 @@
+using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Mvc;
+using ProjectAPI.Controllers.Models;
 
 namespace ProjectAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class PersonController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<PersonController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public PersonController(ILogger<PersonController> logger)
         {
             _logger = logger;
         }
+        //get //post //put //patch  //delete
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
-        {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+        [HttpGet ("")]
+        public IActionResult Get() {
+            var novo = new PersonModel(1, "");
+            return Ok(novo); //200
+            //201
+            //400
+            //500
         }
     }
 }
